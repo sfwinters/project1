@@ -8,6 +8,7 @@ const guessBox = $('#guessBox');
 const guessBtn = $('#guessBtn');
 const h3 = document.getElementsByClassName('h3');
 let wordSpaces = [];
+let wrongGuess = 0;
 
 
 submitWord.click( e => {
@@ -21,10 +22,15 @@ guessBtn.click( e => {
     e.preventDefault();
     let guessedLetter = $('#guessBox').val();
     let mysteryWord = $('#mysteryWord').val();
-    console.log(mysteryWord)
-    for (i = 0; i < mysteryWord.length; i++) {
-        if (mysteryWord[i] === guessedLetter) {
+    console.log(mysteryWord);
+    if (mysteryWord.includes(guessedLetter) === false) {
+        wrongGuess +=1;
+        console.log(wrongGuess)
+        } else {
+            for (i = 0; i < mysteryWord.length; i++) {
+                if (mysteryWord[i] === guessedLetter) {
             wordSpaces.splice(i, 1, guessedLetter)
+            }
         }
     }
     $('.gameArea').html(wordSpaces);
