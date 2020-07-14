@@ -7,7 +7,7 @@ const txt = document.getElementsByClassName('txt');
 const guessBox = $('#guessBox');
 const guessBtn = $('#guessBtn');
 const h3 = document.getElementsByClassName('h3');
-const wordSpaces = [];
+let wordSpaces = [];
 
 
 submitWord.click( e => {
@@ -19,11 +19,14 @@ submitWord.click( e => {
 
 guessBtn.click( e => {
     e.preventDefault();
-    const guessedLetter = $('#guessBox').val();
+    let guessedLetter = $('#guessBox').val();
     console.log(guessedLetter);
-    if ($('#mysteryWord').val().includes(guessedLetter)) {
-        wordSpaces.splice(wordSpaces.indexOf[i], 1, guessedLetter)
-    };
+        if ($('#mysteryWord').val().includes(guessedLetter) === true) {
+            let placeholder = $('#mysteryWord').val().indexOf(guessedLetter);
+            console.log(placeholder)
+            wordSpaces.splice(placeholder, 1, guessedLetter)
+        }
+        $('.gameArea').html(wordSpaces);;
 });
 
 
