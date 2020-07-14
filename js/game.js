@@ -34,6 +34,7 @@ guessBtn.click( e => {
         }
     }
     $('.gameArea').html(wordSpaces);
+    guessBox.val('')
 });
 
 
