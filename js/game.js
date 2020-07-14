@@ -20,14 +20,16 @@ submitWord.click( e => {
 guessBtn.click( e => {
     e.preventDefault();
     let guessedLetter = $('#guessBox').val();
-    console.log(guessedLetter);
-        if ($('#mysteryWord').val().includes(guessedLetter) === true) {
-            let placeholder = $('#mysteryWord').val().indexOf(guessedLetter);
-            console.log(placeholder)
-            wordSpaces.splice(placeholder, 1, guessedLetter)
+    let mysteryWord = $('#mysteryWord').val();
+    console.log(mysteryWord)
+    for (i = 0; i < mysteryWord.length; i++) {
+        if (mysteryWord[i] === guessedLetter) {
+            wordSpaces.splice(i, 1, guessedLetter)
         }
-        $('.gameArea').html(wordSpaces);;
+    }
+    $('.gameArea').html(wordSpaces);
 });
+
 
 
 // randomWord.on('click', e => {
