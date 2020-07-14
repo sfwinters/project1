@@ -1,4 +1,4 @@
-const oxford = 'https://od-api.oxforddictionaries.com/api/v2/entries/english/word_id.lower'
+const ranWords = 'https://github.com/xyfir/rword/blob/master/package.json'
 
 const submitWord = $('#submitWord');
 const randomWord = $('#randomWord');
@@ -39,27 +39,23 @@ guessBtn.click( e => {
 
 
 
-// randomWord.on('click', e => {
-//     e.preventDefault();
+randomWord.on('click', e => {
+    e.preventDefault();
     
-    // $.ajax({
-    //     url: oxford,
-    //     type: 'GET',
-    //     data: {
-    //         // '$limit': ,
-    //         '$$app_id': '5f1c72fb',
-    //         '$$app_key': 'c9c885d975fab31b53797d922d69621'
-    //     },
-    //     success: data => {
-    //         let rdm = Math.floor(Math.random() * data.length);
-    //         let pickedWord = data[rdm];
-    //         console.log(pickedWord);
-    //         },
-    //     error: err => {
-    //         console.log(err, 'error');
-    //         }
-    //     })
-    // });
+    $.ajax({
+        url: ranWords,
+        type: 'GET',
+        data: {
+            // '$limit': ,
+        },
+        success: data => {
+            rword.generate(data)
+            },
+        error: err => {
+            console.log(err, 'error');
+            }
+        })
+    });
 
     function hideElements() {
         btn.submitWord.classList.add('hide-me');
