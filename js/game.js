@@ -14,6 +14,7 @@ let winmsg = $('#winmsg');
 let losemsg = $('#losemsg');
 winmsg.hide();
 losemsg.hide();
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 function wordFactory(word) {
     for (i = 0; i < word.length; i++) {
@@ -77,10 +78,13 @@ guessBtn.click( e => {
         } else {
             for (i = 0; i < reallyFinal.length; i++) {
                 if (reallyFinal[i] === guessedLetter) {
-            wordSpaces.splice(i, 1, guessedLetter)
+                    wordSpaces.splice(i, 1, guessedLetter)
+                } else if (guessedLetter === reallyFinal) {
+                    wordSpaces.splice(0, reallyFinal.length, guessedLetter);
+                    endGame();
+                }
             }
         }
-    }
     $('.gameArea').html(wordSpaces.join('') + '</br>' + 'Guesses Remaining: ' + guessesRemaining);
     guessBox.val('');
     endGame();
@@ -108,15 +112,21 @@ guessBtn.click( e => {
             guessBtn.hide();
             guessBox.hide();
             winmsg.show();
+            $('#resetBtn').show();
         } else if (guessesRemaining <= 0) {
             guessBtn.hide();
             guessBox.hide();
             losemsg.show();
+            $('#resetBtn').show();
         };
-        $('#resetBtn').show();
         $('#resetBtn').click( e => {
             e.preventDefault();
             location.reload();
     })
-    }
+    };
+
+    const alphaDiv = document.createElement('div');
+    alphaDiv.classList.add('alphabet')
+    alphaDiv.innerHTML=alphabet.join(' ');
+    document.body.append(alphaDiv);
     
