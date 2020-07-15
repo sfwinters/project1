@@ -10,7 +10,10 @@ const h3 = document.getElementsByClassName('h3');
 let wordSpaces = [];
 let randomWordsArray = [];
 let finalWord = [];
-
+let winmsg = $('#winmsg');
+let losemsg = $('#losemsg');
+winmsg.hide();
+losemsg.hide();
 
 function wordFactory(word) {
     for (i = 0; i < word.length; i++) {
@@ -60,9 +63,6 @@ randomWord.on('click', e => {
             },
         });
 });
-
-
-
     
 guessBtn.click( e => {
     e.preventDefault();
@@ -81,15 +81,18 @@ guessBtn.click( e => {
             }
         }
     }
-    $('.gameArea').html(wordSpaces.join('') + '</br>' + 'Guesses Remaining: ' + guessesRemaining)
-    
-    guessBox.val('')
+    $('.gameArea').html(wordSpaces.join('') + '</br>' + 'Guesses Remaining: ' + guessesRemaining);
+    guessBox.val('');
+    endGame();
+    console.log(wordSpaces);
+    console.log(reallyFinal);
+    console.log(wordSpaces.join(''))
 });
     function hideElements() {
         btn.submitWord.classList.add('hide-me');
         btn.randomWord.classList.add('hide-me');
         txt.mysteryWord.classList.add('hide-me');
-        h3.h3.classList.add('hide-me')
+        h3.h3.classList.add('hide-me');
        guessBox.show();
        guessBtn.show();
     } 
@@ -97,4 +100,18 @@ guessBtn.click( e => {
     let wrongGuess = $('#guessBtn').wrongGuess
     let guessesRemaining = 6
     
+    // function isLetter(str) {
+    //     str.includes(/[a-z]/) === true;
+    // }
+    function endGame() {
+        if (wordSpaces.join('') === finalWord[0]) {
+            guessBtn.hide();
+            guessBox.hide();
+            winmsg.show();
+        } else if (guessesRemaining <= 0) {
+            guessBtn.hide();
+            guessBox.hide();
+            losemsg.show();
+        }
+    }
     
