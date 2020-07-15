@@ -8,7 +8,6 @@ const guessBox = $('#guessBox');
 const guessBtn = $('#guessBtn');
 const h3 = document.getElementsByClassName('h3');
 let wordSpaces = [];
-let wrongGuess = 0;
 let randomWordsArray = [];
 let finalWord = [];
 
@@ -70,8 +69,10 @@ guessBtn.click( e => {
     let guessedLetter = $('#guessBox').val();
     console.log(guessedLetter)
     let reallyFinal = finalWord[0];
+    let wrongGuess = 0;
     if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess +=1;
+        guessesRemaining -=1;
         console.log(wrongGuess)
         } else {
             for (i = 0; i < reallyFinal.length; i++) {
@@ -80,7 +81,8 @@ guessBtn.click( e => {
             }
         }
     }
-    $('.gameArea').html(wordSpaces);
+    $('.gameArea').html(wordSpaces.join('') + '</br>' + 'Guesses Remaining: ' + guessesRemaining)
+    
     guessBox.val('')
 });
     function hideElements() {
@@ -92,5 +94,7 @@ guessBtn.click( e => {
        guessBtn.show();
     } 
 
+    let wrongGuess = $('#guessBtn').wrongGuess
+    let guessesRemaining = 6
     
     
