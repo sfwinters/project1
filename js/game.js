@@ -1,4 +1,4 @@
-const ranWords = 'https://github.com/xyfir/rword/blob/master/package.json'
+const randomWordUrl = './node_modules/rword/words/big.json';
 
 const submitWord = $('#submitWord');
 const randomWord = $('#randomWord');
@@ -9,26 +9,73 @@ const guessBtn = $('#guessBtn');
 const h3 = document.getElementsByClassName('h3');
 let wordSpaces = [];
 let wrongGuess = 0;
+let randomWordsArray = [];
+let finalWord = [];
 
+
+function wordFactory(word) {
+    for (i = 0; i < word.length; i++) {
+        if (i == 0) {
+            wordSpaces.push('_');
+        } else {
+            wordSpaces.push(' _');
+            };
+    }
+        $('.gameArea').append(wordSpaces);
+    }
 
 submitWord.click( e => {
     e.preventDefault();
-    const mysteryWord = $('#mysteryWord').val();
-    wordFactory(mysteryWord);
+    let mysteryWord = $('#mysteryWord').val();
     hideElements();
+    wordFactory(mysteryWord);
+    console.log(mysteryWord)
+    finalWord.push(mysteryWord);
+    console.log(finalWord);
     });
 
+randomWord.on('click', e => {
+    e.preventDefault();
+    
+    $.ajax({
+        url: randomWordUrl,
+        type: 'GET',
+        success: data => {
+            data.map(i => randomWordsArray.push(i));
+            function pickAWord () {
+                const roulette = Math.floor(Math.random( ) * randomWordsArray.length);
+                let rando = randomWordsArray[roulette];
+                console.log(rando)
+                hideElements();
+                wordFactory(rando);
+                finalWord.push(rando)
+                console.log(finalWord)
+            };
+            pickAWord();
+        },
+        error: err => {
+            console.log(err, 'error');
+            },
+        data: {
+
+            },
+        });
+});
+
+
+
+    
 guessBtn.click( e => {
     e.preventDefault();
     let guessedLetter = $('#guessBox').val();
-    let mysteryWord = $('#mysteryWord').val();
-    console.log(mysteryWord);
-    if (mysteryWord.includes(guessedLetter) === false) {
+    console.log(guessedLetter)
+    let reallyFinal = finalWord[0];
+    if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess +=1;
         console.log(wrongGuess)
         } else {
-            for (i = 0; i < mysteryWord.length; i++) {
-                if (mysteryWord[i] === guessedLetter) {
+            for (i = 0; i < reallyFinal.length; i++) {
+                if (reallyFinal[i] === guessedLetter) {
             wordSpaces.splice(i, 1, guessedLetter)
             }
         }
@@ -36,44 +83,14 @@ guessBtn.click( e => {
     $('.gameArea').html(wordSpaces);
     guessBox.val('')
 });
-
-
-
-randomWord.on('click', e => {
-    e.preventDefault();
-    
-    $.ajax({
-        url: ranWords,
-        type: 'GET',
-        data: {
-            // '$limit': ,
-        },
-        success: data => {
-            rword.generate(data)
-            },
-        error: err => {
-            console.log(err, 'error');
-            }
-        })
-    });
-
     function hideElements() {
         btn.submitWord.classList.add('hide-me');
-        // btn.randomWord.classList.add('hide-me');
+        btn.randomWord.classList.add('hide-me');
         txt.mysteryWord.classList.add('hide-me');
-        // h3.h3.classList.add('hide-me')
+        h3.h3.classList.add('hide-me')
        guessBox.show();
        guessBtn.show();
-    }
+    } 
 
-    function wordFactory(data) {
-        for (i = 0; i < data.length; i++) {
-            if (i == 0) {
-                wordSpaces.push('_');
-            } else {
-                wordSpaces.push(' _');
-                };
-            };
-            $('.gameArea').append(wordSpaces);
-        }
+    
     
