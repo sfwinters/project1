@@ -112,6 +112,11 @@ guessBtn.click( e => {
             guessBtn.hide();
             guessBox.hide();
             losemsg.show();
-        }
+        };
+        $('#resetBtn').show();
+        $('#resetBtn').click( e => {
+            e.preventDefault();
+            location.reload();
+    })
     }
     
