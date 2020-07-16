@@ -74,7 +74,7 @@ guessBtn.click( e => {
     if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess +=1;
         guessesRemaining -=1;
-        console.log(wrongGuess)
+        console.log(wrongGuess);
         } else {
             for (i = 0; i < reallyFinal.length; i++) {
                 if (reallyFinal[i] === guessedLetter) {
@@ -93,7 +93,7 @@ guessBtn.click( e => {
     console.log(wordSpaces.join(''))
 });
     function hideElements() {
-        btn.submitWord.classList.add('hide-me');
+        btn.submitWord.classList.add('hide-me')
         btn.randomWord.classList.add('hide-me');
         txt.mysteryWord.classList.add('hide-me');
         h3.h3.classList.add('hide-me');
@@ -104,9 +104,6 @@ guessBtn.click( e => {
     let wrongGuess = $('#guessBtn').wrongGuess
     let guessesRemaining = 6
     
-    // function isLetter(str) {
-    //     str.includes(/[a-z]/) === true;
-    // }
     function endGame() {
         if (wordSpaces.join('') === finalWord[0]) {
             guessBtn.hide();
@@ -125,8 +122,5 @@ guessBtn.click( e => {
     })
     };
 
-    const alphaDiv = document.createElement('div');
-    alphaDiv.classList.add('alphabet')
-    alphaDiv.innerHTML=alphabet.join(' ');
-    document.body.append(alphaDiv);
-    
+    const alphaDiv = $('.alphabet');
+    alphaDiv.html(alphabet)
