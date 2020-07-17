@@ -77,12 +77,14 @@ guessBtn.click( e => {
     let reallyFinal = finalWord[0];
     let marker = alphabet.indexOf(guessedLetter.toUpperCase());
     let x = alphabet[marker];
-    if (alphabet.includes(guessedLetter.toUpperCase()) === false) {
+    if (guessedLetter === reallyFinal) {
+        wordSpaces.splice(0, reallyFinal.length, guessedLetter);
+        endGame();
+    } else if (alphabet.includes(guessedLetter.toUpperCase()) === false) {
             alert( "You have already picked this letter." );
             guessBox.val('');
             return;
-        };
-    if (reallyFinal.includes(guessedLetter) === false) {
+    } else if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess += 1;
         guessesRemaining -=1;
         console.log(alphabet.splice(marker, 1));
@@ -91,10 +93,7 @@ guessBtn.click( e => {
                 if (reallyFinal[i] === guessedLetter) {
                     wordSpaces.splice(i, 1, guessedLetter)
                     console.log(alphabet.splice(marker, 1));
-                } else if (guessedLetter === reallyFinal) {
-                    wordSpaces.splice(0, reallyFinal.length, guessedLetter);
-                    endGame();
-                }
+                } 
             }
         }
     $('.gameArea').html(wordSpaces.join('') + '</br>' + 'Guesses Remaining: ' + guessesRemaining);
