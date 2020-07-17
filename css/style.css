@@ -1,21 +1,5 @@
-h1 {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
 .hide-me {
     display: none;
 };
 
-.alphabet {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-weight: 700;
-};
-
-.correct {
-    color: grey;
-};
-
-.incorrect {
-    color: red;
-};
 

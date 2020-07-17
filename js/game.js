@@ -71,7 +71,8 @@ randomWord.on('click', e => {
     
 guessBtn.click( e => {
     e.preventDefault();
-    let guessedLetter = $('#guessBox').val();
+    let guess = $('#guessBox').val();
+    let guessedLetter = guess.toLowerCase();
     let reallyFinal = finalWord[0];
     if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess += 1;
@@ -124,5 +125,5 @@ guessBtn.click( e => {
     });
     };
 
-    const alphaDiv = $('.alphabet');
-    alphaDiv.html(alphabet)
+const alphaDiv = document.getElementById('alphabetArea');
+
