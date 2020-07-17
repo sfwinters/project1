@@ -20,6 +20,7 @@ losemsg.hide();
 let wrongGuess = 0;
 let imgloc = document.getElementsByClassName("hangimg");
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+$('#bettos').append(alphabet)
 
 function wordFactory(word) {
     for (i = 0; i < word.length; i++) {
@@ -98,7 +99,7 @@ guessBtn.click( e => {
         btn.submitWord.classList.add('hide-me')
         btn.randomWord.classList.add('hide-me');
         txt.mysteryWord.classList.add('hide-me');
-        h3.h3.classList.add('hide-me');
+        $('#h2-1').hide();
        guessBox.show();
        guessBtn.show();
     } 
@@ -126,4 +127,3 @@ guessBtn.click( e => {
     };
 
 const alphaDiv = document.getElementById('alphabetArea');
-
