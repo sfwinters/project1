@@ -19,8 +19,8 @@ winmsg.hide();
 losemsg.hide();
 let wrongGuess = 0;
 let imgloc = document.getElementsByClassName("hangimg");
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-$('#bettos').append(alphabet)
+let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+$('#bettos').append(alphabet);
 
 function wordFactory(word) {
     for (i = 0; i < word.length; i++) {
@@ -39,7 +39,7 @@ submitWord.click( e => {
     hideElements();
     wordFactory(mysteryWord);
     console.log(mysteryWord)
-    finalWord.push(mysteryWord);
+    finalWord.push(mysteryWord.toLowerCase());
     });
 
 randomWord.on('click', e => {
@@ -56,7 +56,7 @@ randomWord.on('click', e => {
                 console.log(rando)
                 hideElements();
                 wordFactory(rando);
-                finalWord.push(rando);
+                finalWord.push(rando.toLowerCase());
                 console.log(finalWord);
             };
             pickAWord();
@@ -75,15 +75,22 @@ guessBtn.click( e => {
     let guess = $('#guessBox').val();
     let guessedLetter = guess.toLowerCase();
     let reallyFinal = finalWord[0];
+    let marker = alphabet.indexOf(guessedLetter.toUpperCase());
+    let x = alphabet[marker];
+    if (alphabet.includes(guessedLetter.toUpperCase()) === false) {
+            alert( "You have already picked this letter." );
+            guessBox.val('');
+            return;
+        };
     if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess += 1;
         guessesRemaining -=1;
-        
-        console.log(imgloc)
+        console.log(alphabet.splice(marker, 1));
         } else {
             for (i = 0; i < reallyFinal.length; i++) {
                 if (reallyFinal[i] === guessedLetter) {
                     wordSpaces.splice(i, 1, guessedLetter)
+                    console.log(alphabet.splice(marker, 1));
                 } else if (guessedLetter === reallyFinal) {
                     wordSpaces.splice(0, reallyFinal.length, guessedLetter);
                     endGame();
@@ -92,9 +99,10 @@ guessBtn.click( e => {
         }
     $('.gameArea').html(wordSpaces.join('') + '</br>' + 'Guesses Remaining: ' + guessesRemaining);
     $("#hangimg").attr("src","img/hangman-" + wrongGuess + ".png");
+    $('#bettos').html(alphabet)
     guessBox.val('');
     endGame(); 
-});
+    });
     function hideElements() {
         btn.submitWord.classList.add('hide-me')
         btn.randomWord.classList.add('hide-me');
