@@ -92,7 +92,7 @@ guessBtn.click( e => {
             for (i = 0; i < reallyFinal.length; i++) {
                 if (reallyFinal[i] === guessedLetter) {
                     wordSpaces.splice(i, 1, guessedLetter)
-                    console.log(alphabet.splice(marker, 1));
+                    console.log(alphabet.splice(marker, 1, ''));
                 } 
             }
         }
@@ -107,8 +107,8 @@ guessBtn.click( e => {
         btn.randomWord.classList.add('hide-me');
         txt.mysteryWord.classList.add('hide-me');
         $('#h2-1').hide();
-       guessBox.show();
-       guessBtn.show();
+        guessBox.show();
+        guessBtn.show();
     } 
 
     // let wrongGuess = $('#guessBtn').wrongGuess
