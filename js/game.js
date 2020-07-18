@@ -1,4 +1,4 @@
-const randomWordUrl = './node_modules/rword/words/big.json';
+const randomWordUrl = './js/big.json';
 
 const submitWord = $('#submitWord');
 const randomWord = $('#randomWord');
