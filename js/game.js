@@ -76,7 +76,6 @@ guessBtn.click( e => {
     let guessedLetter = guess.toLowerCase();
     let reallyFinal = finalWord[0];
     let marker = alphabet.indexOf(guessedLetter.toUpperCase());
-    let x = alphabet[marker];
     if (guessedLetter === reallyFinal) {
         wordSpaces.splice(0, reallyFinal.length, guessedLetter);
         endGame();
@@ -87,12 +86,10 @@ guessBtn.click( e => {
     } else if (reallyFinal.includes(guessedLetter) === false) {
         wrongGuess += 1;
         guessesRemaining -=1;
-        console.log(alphabet.splice(marker, 1));
         } else {
             for (i = 0; i < reallyFinal.length; i++) {
                 if (reallyFinal[i] === guessedLetter) {
-                    wordSpaces.splice(i, 1, guessedLetter)
-                    console.log(alphabet.splice(marker, 1, ''));
+                    wordSpaces.splice(i, 1, guessedLetter);
                 } 
             }
         }
